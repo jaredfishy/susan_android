@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import za.co.jaredfishy.susan.R;
 import za.co.jaredfishy.susan.activity.lights.LightsActivity;
-import za.co.jaredfishy.susan.domain.PokeResponse;
+import za.co.jaredfishy.susan.domain.SusanResponse;
 import za.co.jaredfishy.susan.task.LightPokeTask;
 
 public class MainActivity extends BaseActivity {
@@ -29,7 +29,7 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         txtStatus = findViewById(R.id.main_status);
-        btnLights = findViewById(R.id.button_lights);
+        btnLights = findViewById(R.id.button_main_lights);
         btnLights.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,12 +52,12 @@ public class MainActivity extends BaseActivity {
             }
 
             @Override
-            protected void onPostExecute(PokeResponse pokeResponse) {
-                txtStatus.setText("Welcome :)");
+            protected void onPostExecute(SusanResponse pokeResponse) {
                 if (pokeResponse != null) {
+                    txtStatus.setText("Welcome :)");
                     btnLights.setVisibility(View.VISIBLE);
                 } else {
-                    Toast.makeText(MainActivity.this, "Server is unreachable", Toast.LENGTH_SHORT).show();
+                    txtStatus.setText("Server is unavailable :(");
                 }
             }
         };

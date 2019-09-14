@@ -2,7 +2,7 @@ package za.co.jaredfishy.susan.domain;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PokeResponse {
+public class SusanResponse {
 
     @SerializedName("message")
     private String message;

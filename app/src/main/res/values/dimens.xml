@@ -3,4 +3,6 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="lights_button_w">200dp</dimen>
+    <dimen name="light_button_h">80dp</dimen>
 </resources>

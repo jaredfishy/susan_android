@@ -1,20 +1,22 @@
 package za.co.jaredfishy.susan.rest;
 
-import retrofit2.Call;
-import retrofit2.http.GET;
+import za.co.jaredfishy.susan.R;
+import za.co.jaredfishy.susan.Susan;
 
-public interface LightService {
+public class LightService extends Service<LightServiceMethods> {
 
-    @GET("/poke")
-    Call<String> poke();
+    private static final String BASE_URL = Susan.getContext().getResources().getString(R.string.susan_url);
 
-    @GET("light/discover")
-    Call<String> discover();
+    private static LightService instance;
 
-    @GET("light/on")
-    Call<String> turnOn();
+    public static LightServiceMethods get() {
+        if (instance == null)
+            instance = new LightService();
 
-    @GET("light/off")
-    Call<String> turnOff();
+        return instance.getService();
+    }
 
+    private LightService() {
+        super(BASE_URL, LightServiceMethods.class);
+    }
 }
