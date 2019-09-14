@@ -5,12 +5,18 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.Window;
 
-public abstract class BaseActivity extends AppCompatActivity {
+import za.co.jaredfishy.susan.activity.fragments.BaseFragment;
+
+public abstract class BaseActivity<T extends BaseFragment> extends AppCompatActivity {
+
+    protected final int contentRootId = 12345;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,5 +36,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             super.startActivity(intent);
         }
+    }
+
+    public void displayFragment (T fragment) {
+        fragment.setContext(this);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(contentRootId, fragment).addToBackStack("tag");
+        transaction.commit();
     }
 }

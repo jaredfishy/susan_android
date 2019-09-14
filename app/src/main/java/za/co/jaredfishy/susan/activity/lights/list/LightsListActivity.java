@@ -26,29 +26,29 @@ public class LightsListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lights_list);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnAddClick();
-            }
-        });
-
-        lightHandler = new LightHandler();
-        lightHandlerAdapter = new LightHandlerAdapter(lightHandler, new LightHandlerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Light light) {
-                toggleLight(light);
-            }
-        });
-
-        RecyclerView recyclerView = findViewById(R.id.listview);
-        recyclerView.setAdapter(lightHandlerAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+       // setContentView(R.layout.activity_lights_list);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        //FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                btnAddClick();
+//            }
+//        });
+//
+//        lightHandler = new LightHandler();
+//        lightHandlerAdapter = new LightHandlerAdapter(lightHandler, new LightHandlerAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(Light light) {
+//                toggleLight(light);
+//            }
+//        });
+//
+//        RecyclerView recyclerView = findViewById(R.id.listview);
+//        recyclerView.setAdapter(lightHandlerAdapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
