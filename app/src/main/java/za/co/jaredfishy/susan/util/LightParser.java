@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import za.co.jaredfishy.susan.domain.Light;
+import za.co.jaredfishy.susan.domain.lights.Light;
 
 public class LightParser {
 

@@ -4,7 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import za.co.jaredfishy.susan.domain.Light;
+import za.co.jaredfishy.susan.domain.lights.Light;
+import za.co.jaredfishy.susan.handler.lights.LightHandler;
 import za.co.jaredfishy.susan.util.DummyLightUtil;
 
 import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
