@@ -1,89 +1,152 @@
 package za.co.jaredfishy.susan.activity;
 
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import za.co.jaredfishy.susan.R;
-import za.co.jaredfishy.susan.activity.lights.LightsActivity;
-import za.co.jaredfishy.susan.domain.SusanResponse;
-import za.co.jaredfishy.susan.task.LightPokeTask;
+import za.co.jaredfishy.susan.activity.fragments.BaseFragment;
+import za.co.jaredfishy.susan.activity.fragments.LightsFragment;
+import za.co.jaredfishy.susan.activity.fragments.StatusFragment;
+import za.co.jaredfishy.susan.ui.JZMenuItem;
 
 public class MainActivity extends BaseActivity {
 
-    private TextView txtStatus;
-    private Button btnLights;
+    private DrawerLayout mDrawerLayout;
+    private LinearLayout llRoot;
+    private NavigationView navMenu;
+
+    private StatusFragment.OnMenuItemAvailabilityChangeListener onMenuItemAvailabilityChangeListener;
+
+    private Toolbar toolbar;
+    private LinearLayout llContent;
+
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.drawer_layout);
 
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        llRoot = findViewById(R.id.drawer_root);
+        navMenu = findViewById(R.id.drawer_menu);
 
-        txtStatus = findViewById(R.id.main_status);
-        btnLights = findViewById(R.id.button_main_lights);
-        btnLights.setOnClickListener(new View.OnClickListener() {
+        setupDrawer();
+        setupMenu();
+        setupRoot();
+
+        onMenuItemAvailabilityChangeListener = new StatusFragment.OnMenuItemAvailabilityChangeListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LightsActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnLights.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        LightPokeTask pokeTask = new LightPokeTask() {
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                txtStatus.setText("...");
-            }
-
-            @Override
-            protected void onPostExecute(SusanResponse pokeResponse) {
-                if (pokeResponse != null) {
-                    txtStatus.setText("Welcome :)");
-                    btnLights.setVisibility(View.VISIBLE);
-                } else {
-                    txtStatus.setText("Server is unavailable :(");
-                }
+            public void availabilityChanged(JZMenuItem menuItem) {
+                refreshMenuItem(menuItem);
             }
         };
-        pokeTask.execute();
+
+        displayFragment(StatusFragment.newInstance(onMenuItemAvailabilityChangeListener));
+    }
+
+    private void setupDrawer() {
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.button_lights_on, R.string.button_lights_off) {
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+//                getSupportActionBar().setTitle("Navigation!");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+//                getSupportActionBar().setTitle("Susan");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
     }
 
+    public void setupRoot() {
+
+        llContent = new LinearLayout(this);
+        llContent.setId(contentRootId);
+        llContent.setOrientation(LinearLayout.VERTICAL);
+
+        ScrollView scrollView = new ScrollView(this);
+        scrollView.addView(llContent);
+        llRoot.addView(scrollView);
+    }
+
+    private void setupMenu() {
+
+        navMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                return handleMenuItemSelected(menuItem);
+            }
+        });
+
+        Menu m = navMenu.getMenu();
+        for (JZMenuItem menuItem : JZMenuItem.values()) {
+            MenuItem item = m.add(menuItem.getGroup(), menuItem.getResourceId(), menuItem.getResourceId(), menuItem.getText());
+            item.setEnabled(menuItem.isAvailable());
+        }
+    }
+
+    private void displayFragmentFromMenu(BaseFragment fragment) {
+        mDrawerLayout.closeDrawers();
+        displayFragment(fragment);
+    }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        return handleMenuItemSelected(item);
+    }
 
-        return super.onOptionsItemSelected(item);
+
+    private boolean handleMenuItemSelected(MenuItem item) {
+        JZMenuItem menuItem = JZMenuItem.fromResourceId(item.getItemId());
+        switch (menuItem) {
+            case STATUS:
+                displayFragmentFromMenu(StatusFragment.newInstance(onMenuItemAvailabilityChangeListener));
+                return true;
+            case LIGHTS:
+                displayFragmentFromMenu(LightsFragment.newInstance());
+                return true;
+            case SETTINGS:
+                Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public void refreshMenuItem(JZMenuItem menuItem) {
+        Menu menu = navMenu.getMenu();
+        System.out.println(menuItem.getText() + " is now " + menuItem.isAvailable());
+        menu.findItem(menuItem.getResourceId()).setEnabled(menuItem.isAvailable());
     }
 }
