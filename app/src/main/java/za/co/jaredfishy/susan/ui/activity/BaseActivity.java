@@ -44,4 +44,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public void back() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack();
+
+    }
 }

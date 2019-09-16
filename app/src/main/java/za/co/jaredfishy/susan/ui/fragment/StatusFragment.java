@@ -31,13 +31,13 @@ public class StatusFragment extends BaseFragment {
         JZTextView textView = new JZTextView(getActivity());
         textView.setText("Hello :)");
         textView.setGravity(Gravity.CENTER);
-        llRoot.addView(textView);
-        llRoot.addView(new JZTextView(getActivity()));
+        fragmentRoot.addView(textView);
+        fragmentRoot.addView(new JZTextView(getActivity()));
 
         txtStatus = new JZTextView(getActivity());
         txtStatus.setText("");
         txtStatus.setGravity(Gravity.CENTER);
-        llRoot.addView(txtStatus);
+        fragmentRoot.addView(txtStatus);
     }
 
     @Override

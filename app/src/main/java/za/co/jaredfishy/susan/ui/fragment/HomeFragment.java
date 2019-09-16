@@ -7,11 +7,11 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.co.jaredfishy.susan.domain.JZMenuItem;
 import za.co.jaredfishy.susan.handler.status.ServiceStatusHandler;
 import za.co.jaredfishy.susan.task.JZMenuItemOnClickListener;
 import za.co.jaredfishy.susan.ui.view.JZIconButton;
 import za.co.jaredfishy.susan.ui.view.JZIconGrid;
-import za.co.jaredfishy.susan.ui.view.JZMenuItem;
 
 public class HomeFragment extends BaseFragment {
 

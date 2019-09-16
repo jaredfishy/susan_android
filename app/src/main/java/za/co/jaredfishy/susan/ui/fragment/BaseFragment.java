@@ -15,7 +15,7 @@ import za.co.jaredfishy.susan.util.DimensionUtil;
 public abstract class BaseFragment extends Fragment {
 
     protected BaseActivity context;
-    protected LinearLayout llRoot;
+    protected LinearLayout fragmentRoot;
     protected String title;
 
     public BaseFragment(String title) {
@@ -31,7 +31,7 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return llRoot;
+        return fragmentRoot;
     }
 
     @Override
@@ -42,14 +42,14 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void setupRoot() {
-        llRoot = new LinearLayout(context);
-        llRoot.setOrientation(LinearLayout.VERTICAL);
+        fragmentRoot = new LinearLayout(context);
+        fragmentRoot.setOrientation(LinearLayout.VERTICAL);
         int size = DimensionUtil.getPixels(context, 10);
-        llRoot.setPadding(size, size, size, size);
+        fragmentRoot.setPadding(size, size, size, size);
     }
 
     protected void addView(View view) {
-        llRoot.addView(view);
+        fragmentRoot.addView(view);
     }
 
     public void setContext(BaseActivity context) {

@@ -1,4 +1,4 @@
-package za.co.jaredfishy.susan.ui.view;
+package za.co.jaredfishy.susan.domain;
 
 import za.co.jaredfishy.susan.R;
 import za.co.jaredfishy.susan.domain.susan.SusanService;

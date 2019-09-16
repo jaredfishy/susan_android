@@ -1,6 +1,8 @@
 package za.co.jaredfishy.susan.ui.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -20,8 +22,9 @@ import za.co.jaredfishy.susan.task.OnAvailabilityChangedListener;
 import za.co.jaredfishy.susan.ui.fragment.BaseFragment;
 import za.co.jaredfishy.susan.ui.fragment.HomeFragment;
 import za.co.jaredfishy.susan.ui.fragment.LightsFragment;
+import za.co.jaredfishy.susan.ui.fragment.SettingsFragment;
 import za.co.jaredfishy.susan.ui.fragment.StatusFragment;
-import za.co.jaredfishy.susan.ui.view.JZMenuItem;
+import za.co.jaredfishy.susan.domain.JZMenuItem;
 
 public class MainActivity extends BaseActivity implements JZMenuItemOnClickListener, OnAvailabilityChangedListener {
 
@@ -154,11 +157,7 @@ public class MainActivity extends BaseActivity implements JZMenuItemOnClickListe
                 displayFragmentFromMenu(LightsFragment.newInstance());
                 return true;
             case SETTINGS:
-                Toast.makeText(this, "Coming soon...", Toast.LENGTH_SHORT).show();
-
-                ServiceStatusHandler handler = ServiceStatusHandler.getInstance();
-                handler.setAvailable(JZMenuItem.LIGHTS.getService(), !handler.isAvailable(JZMenuItem.LIGHTS.getService()));
-
+                displayFragmentFromMenu(SettingsFragment.newInstance());
                 return true;
             default:
                 return false;

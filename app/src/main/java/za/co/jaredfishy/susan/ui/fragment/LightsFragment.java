@@ -13,10 +13,9 @@ import za.co.jaredfishy.susan.ui.view.JZButton;
 
 public class LightsFragment extends BaseFragment {
 
-    public static LightsFragment newInstance(){
+    public static LightsFragment newInstance() {
         return new LightsFragment();
     }
-
 
     private JZButton btnLightsOn;
     private JZButton btnLightsOff;
@@ -80,16 +79,16 @@ public class LightsFragment extends BaseFragment {
             }
         });
 
-        llRoot.addView(btnLightsOn);
-        llRoot.addView(btnLightsOff);
-        llRoot.addView(btnDiscoverAll);
+        fragmentRoot.addView(btnLightsOn);
+        fragmentRoot.addView(btnLightsOff);
+        fragmentRoot.addView(btnDiscoverAll);
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(!prepared) {
+        if (!prepared) {
             prepare();
             prepared = true;
         }
