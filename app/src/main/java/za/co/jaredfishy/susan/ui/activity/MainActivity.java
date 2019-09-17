@@ -14,11 +14,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import za.co.jaredfishy.susan.R;
+import za.co.jaredfishy.susan.domain.susan.SusanResponse;
 import za.co.jaredfishy.susan.domain.susan.SusanService;
 import za.co.jaredfishy.susan.handler.status.ServiceStatusHandler;
 import za.co.jaredfishy.susan.task.Callback;
 import za.co.jaredfishy.susan.task.JZMenuItemOnClickListener;
 import za.co.jaredfishy.susan.task.OnAvailabilityChangedListener;
+import za.co.jaredfishy.susan.task.susan.SusanPokeTask;
 import za.co.jaredfishy.susan.ui.fragment.BaseFragment;
 import za.co.jaredfishy.susan.ui.fragment.HomeFragment;
 import za.co.jaredfishy.susan.ui.fragment.LightsFragment;
@@ -158,6 +160,17 @@ public class MainActivity extends BaseActivity implements JZMenuItemOnClickListe
                 return true;
             case SETTINGS:
                 displayFragmentFromMenu(SettingsFragment.newInstance());
+                return true;
+            case TEST:
+
+                SusanPokeTask pokeTask = new SusanPokeTask(){
+                    @Override
+                    protected void onPostExecute(SusanResponse susanResponse) {
+                        super.onPostExecute(susanResponse);
+                    }
+                };
+
+
                 return true;
             default:
                 return false;

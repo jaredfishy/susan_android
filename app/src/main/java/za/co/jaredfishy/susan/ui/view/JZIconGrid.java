@@ -2,7 +2,6 @@ package za.co.jaredfishy.susan.ui.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ public class JZIconGrid extends LinearLayout {
         this.views = new ArrayList<>();
         super.setOrientation(VERTICAL);
         super.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        super.setPadding(10, 10, 10, 10);
     }
 
     public void addView(View view) {
@@ -42,13 +40,12 @@ public class JZIconGrid extends LinearLayout {
     }
 
     private void relayout() {
-
         clearViews();
 
         int viewCount = views.size();
         List<List<Integer>> layout = GridLayoutIndexGenerator.spreadNicely(viewCount);
 
-        LinearLayout.LayoutParams rowLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+        LinearLayout.LayoutParams rowLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         rowLayoutParams.weight = 1;
         LinearLayout.LayoutParams colLayoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
         colLayoutParams.weight = 1;
@@ -56,6 +53,7 @@ public class JZIconGrid extends LinearLayout {
         for (List<Integer> row : layout) {
             LinearLayout llRow = (LinearLayout) ((Activity) context).getLayoutInflater().inflate(R.layout.ui_grid_row, null);
             llRow.setLayoutParams(rowLayoutParams);
+            llRow.setGravity(Gravity.CENTER);
             for (Integer index : row) {
                 LinearLayout block = (LinearLayout) ((Activity) context).getLayoutInflater().inflate(R.layout.ui_grid_block, null);
                 block.setGravity(Gravity.CENTER);

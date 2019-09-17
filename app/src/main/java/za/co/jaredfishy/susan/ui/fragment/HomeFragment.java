@@ -22,7 +22,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private static final JZMenuItem[] TILES = new JZMenuItem[]{
-            JZMenuItem.STATUS, JZMenuItem.LIGHTS,
+            JZMenuItem.STATUS, JZMenuItem.LIGHTS
     };
 
     private JZMenuItemOnClickListener menuItemClickListener;

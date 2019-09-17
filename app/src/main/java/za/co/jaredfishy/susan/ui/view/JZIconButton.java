@@ -15,12 +15,10 @@ public class JZIconButton extends android.support.v7.widget.AppCompatButton {
         super(new ContextThemeWrapper(context, R.style.JZAppTheme_Button));
         this.menuItem = menuItem;
 
-        int padding = getResources().getDimensionPixelSize(R.dimen.ui_jz_icon_button_padding);
-
-        super.setGravity(Gravity.CENTER);
-        super.setPadding(padding, padding, padding, padding);
-        super.setText(menuItem.getText());
-        super.setCompoundDrawablesRelativeWithIntrinsicBounds(menuItem.getResourceId(), 0, 0, 0);
+        this.setGravity(Gravity.CENTER);
+        this.setText(menuItem.getText());
+        this.setCompoundDrawablesRelativeWithIntrinsicBounds(menuItem.getResourceId(), 0, 0, 0);
+        this.setBackgroundResource(R.drawable.ui_button);
     }
 
     public JZMenuItem getMenuItem() {
