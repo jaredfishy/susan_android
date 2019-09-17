@@ -11,12 +11,11 @@ import android.widget.LinearLayout;
 
 import za.co.jaredfishy.susan.R;
 import za.co.jaredfishy.susan.ui.activity.BaseActivity;
-import za.co.jaredfishy.susan.util.DimensionUtil;
 
 public abstract class BaseFragment extends Fragment {
 
     protected BaseActivity context;
-    protected LinearLayout fragmentRoot;
+    private LinearLayout fragmentRoot;
     protected String title;
 
     public BaseFragment(String title) {

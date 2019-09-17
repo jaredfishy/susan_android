@@ -16,6 +16,4 @@
     <string name="susan_url_local">http://10.0.2.2:8080/</string>
     <string name="button_lights_discover_all">Discover</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

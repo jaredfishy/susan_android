@@ -2,15 +2,11 @@ package za.co.jaredfishy.susan.task.lights;
 
 import za.co.jaredfishy.susan.domain.susan.SusanResponse;
 import za.co.jaredfishy.susan.rest.LightService;
+import za.co.jaredfishy.susan.task.JZTask;
 
-public class LightOffTask extends LightTask<SusanResponse> {
+public abstract class LightOffTask extends JZTask<SusanResponse> {
 
     public LightOffTask() {
-        super(SusanResponse.class);
-    }
-
-    @Override
-    protected SusanResponse executeServiceCall(String... string) {
-        return execute(LightService.get().turnOff());
+        super(SusanResponse.class, LightService.get().turnOff());
     }
 }

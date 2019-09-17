@@ -50,10 +50,6 @@ public class ServiceStatusHandler {
         final OnAvailabilityChangedListener onAvailabilityChangedListener = new OnAvailabilityChangedListener() {
             @Override
             public void onAvailabilityChanged(SusanService service, boolean available) {
-                if (available)
-                    System.out.println(service + " is available");
-                else
-                    System.out.println(service + " is unavailable");
                 serviceAvailability.put(service, available);
                 checkProgress.remove(service);
 

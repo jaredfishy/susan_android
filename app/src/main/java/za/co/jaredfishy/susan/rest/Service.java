@@ -3,6 +3,7 @@ package za.co.jaredfishy.susan.rest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -14,6 +15,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import za.co.jaredfishy.susan.util.BasicAuthHeaderGenerator;
 
 public abstract class Service<T> {
+
+    private static final long TIMEOUT = 3000;
 
     private String baseUrl;
     private Class<T> serviceDefinition;
@@ -49,20 +52,23 @@ public abstract class Service<T> {
 
     private OkHttpClient getAuthClient(final Headers headers) {
 
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Interceptor.Chain chain) throws IOException {
-                Request original = chain.request();
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+                .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Interceptor.Chain chain) throws IOException {
+                        Request original = chain.request();
 
-                Request request = original.newBuilder()
-                        .headers(headers)
-                        .method(original.method(), original.body())
-                        .build();
+                        Request request = original.newBuilder()
+                                .headers(headers)
+                                .method(original.method(), original.body())
+                                .build();
 
-                return chain.proceed(request);
-            }
-        });
+                        return chain.proceed(request);
+                    }
+                });
 
         return httpClient.build();
     }

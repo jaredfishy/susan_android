@@ -38,8 +38,13 @@ public class LightsFragment extends BaseFragment {
 
                 LightOnTask task = new LightOnTask() {
                     @Override
-                    protected void onPostExecute(SusanResponse susanResponse) {
+                    protected void onSuccess(SusanResponse susanResponse) {
                         Toast.makeText(getActivity(), susanResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    protected void onFail(String response) {
+                        Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
                     }
                 };
                 task.execute();
@@ -53,8 +58,13 @@ public class LightsFragment extends BaseFragment {
 
                 LightOffTask task = new LightOffTask() {
                     @Override
-                    protected void onPostExecute(SusanResponse susanResponse) {
+                    protected void onSuccess(SusanResponse susanResponse) {
                         Toast.makeText(getActivity(), susanResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    protected void onFail(String response) {
+                        Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
                     }
                 };
                 task.execute();
@@ -69,9 +79,14 @@ public class LightsFragment extends BaseFragment {
 
                 LightDiscoveryAllTask task = new LightDiscoveryAllTask() {
                     @Override
-                    protected void onPostExecute(SusanResponse susanResponse) {
+                    protected void onSuccess(SusanResponse susanResponse) {
                         Toast.makeText(getActivity(), susanResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         prepare();
+                    }
+
+                    @Override
+                    protected void onFail(String response) {
+                        Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
                     }
                 };
                 task.execute();
@@ -79,9 +94,9 @@ public class LightsFragment extends BaseFragment {
             }
         });
 
-        fragmentRoot.addView(btnLightsOn);
-        fragmentRoot.addView(btnLightsOff);
-        fragmentRoot.addView(btnDiscoverAll);
+       addView(btnLightsOn);
+       addView(btnLightsOff);
+       addView(btnDiscoverAll);
 
     }
 
@@ -98,8 +113,13 @@ public class LightsFragment extends BaseFragment {
     private void prepare() {
         LightPrepareTask task = new LightPrepareTask() {
             @Override
-            protected void onPostExecute(SusanResponse susanResponse) {
+            protected void onSuccess(SusanResponse susanResponse) {
                 Toast.makeText(getActivity(), susanResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            protected void onFail(String response) {
+                Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
             }
         };
         task.execute();

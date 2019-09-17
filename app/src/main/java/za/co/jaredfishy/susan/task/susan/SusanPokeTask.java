@@ -1,25 +1,12 @@
 package za.co.jaredfishy.susan.task.susan;
 
-import android.os.AsyncTask;
-
 import za.co.jaredfishy.susan.domain.susan.SusanResponse;
 import za.co.jaredfishy.susan.rest.LightService;
-import za.co.jaredfishy.susan.rest.LightServiceMethods;
-import za.co.jaredfishy.susan.rest.ServiceResponseProcessor;
-import za.co.jaredfishy.susan.util.JsonParser;
-import za.co.jaredfishy.susan.util.ThreadSleeper;
+import za.co.jaredfishy.susan.task.JZTask;
 
-public class SusanPokeTask extends AsyncTask<String, String, SusanResponse> {
+public abstract class SusanPokeTask extends JZTask<SusanResponse> {
 
-    @Override
-    protected SusanResponse doInBackground(String... string) {
-
-        LightServiceMethods service = LightService.get();
-
-        ServiceResponseProcessor responseProcessor = new ServiceResponseProcessor();
-        String response = responseProcessor.getString(service.poke());
-
-        System.out.println("Poke response: " + response);
-        return JsonParser.fromJson(response, SusanResponse.class);
+    public SusanPokeTask() {
+        super(SusanResponse.class, LightService.get().poke());
     }
 }

@@ -23,6 +23,7 @@
     <Button
         android:id="@+id/splash_button_ok"
         android:theme="?attr/primaryButtonTheme"
+        android:background="@drawable/ui_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@android:string/ok"

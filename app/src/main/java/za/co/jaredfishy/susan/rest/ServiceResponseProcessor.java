@@ -9,52 +9,52 @@ public class ServiceResponseProcessor {
 
     private static final long SLEEP_DURATION = 100;
 
-    public String getString(final Call<String> call) {
-        final CallStatus callStatus = new CallStatus();
-        callStatus.running = true;
+    public String getString(final Call<String> call) throws Throwable {
+        final CallResult callResult = new CallResult();
+        callResult.running = true;
         call.enqueue(new Callback<String>() {
 
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                callStatus.response = response.body();
-                callStatus.running = false;
+                callResult.response = response.body();
+                callResult.running = false;
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 t.printStackTrace();
-                callStatus.response = t.getMessage();
-                callStatus.error = true;
+                callResult.response = t.getMessage();
+                callResult.throwable = t;
             }
         });
 
-        while (callStatus.isRunning()) {
+        while (callResult.isRunning()) {
             ThreadSleeper.sleep(SLEEP_DURATION);
-            callStatus.runtime += SLEEP_DURATION;
+            callResult.runtime += SLEEP_DURATION;
         }
 
-        if (!callStatus.error)
-            return callStatus.response;
+        if (callResult.throwable == null)
+            return callResult.response;
 
-        throw new RuntimeException(callStatus.response);
+        throw callResult.throwable;
     }
 
-    private class CallStatus {
+    private class CallResult {
 
         private boolean running;
-        private boolean error;
+        private Throwable throwable;
         private String response;
         private long runtime;
 
-        private CallStatus() {
+        private CallResult() {
             running = false;
-            error = false;
+            throwable = null;
             response = "";
             runtime = 0;
         }
 
         private boolean isRunning() {
-            return running && !error && runtime < 10000;
+            return running && throwable == null && runtime < 10000;
         }
     }
 

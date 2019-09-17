@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import za.co.jaredfishy.susan.R;
 import za.co.jaredfishy.susan.domain.susan.SusanResponse;
@@ -38,11 +39,12 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        txtStatus.setText("...");
+        txtStatus.setText("Connecting...");
 
         SusanPokeTask susanPokeTask = new SusanPokeTask() {
+
             @Override
-            protected void onPostExecute(SusanResponse susanResponse) {
+            protected void onSuccess(SusanResponse response) {
 
                 ServiceStatusHandler serverStatusHandler = ServiceStatusHandler.getInstance();
                 serverStatusHandler.checkAvailableServices(new Callback<SusanResponse>() {
@@ -53,6 +55,11 @@ public class SplashActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+
+            @Override
+            protected void onFail(String response) {
+                txtStatus.setText(response);
             }
         };
         susanPokeTask.execute();

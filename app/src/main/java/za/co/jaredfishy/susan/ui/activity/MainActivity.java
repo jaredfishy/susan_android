@@ -162,15 +162,6 @@ public class MainActivity extends BaseActivity implements JZMenuItemOnClickListe
                 displayFragmentFromMenu(SettingsFragment.newInstance());
                 return true;
             case TEST:
-
-                SusanPokeTask pokeTask = new SusanPokeTask(){
-                    @Override
-                    protected void onPostExecute(SusanResponse susanResponse) {
-                        super.onPostExecute(susanResponse);
-                    }
-                };
-
-
                 return true;
             default:
                 return false;

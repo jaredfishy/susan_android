@@ -2,15 +2,11 @@ package za.co.jaredfishy.susan.task.lights;
 
 import za.co.jaredfishy.susan.domain.susan.SusanResponse;
 import za.co.jaredfishy.susan.rest.LightService;
+import za.co.jaredfishy.susan.task.JZTask;
 
-public class LightDiscoveryAllTask extends LightTask<SusanResponse> {
+public abstract class LightDiscoveryAllTask extends JZTask<SusanResponse> {
 
     public LightDiscoveryAllTask() {
-        super(SusanResponse.class);
-    }
-
-    @Override
-    protected SusanResponse executeServiceCall(String... string) {
-        return execute(LightService.get().discoverAll());
+        super(SusanResponse.class, LightService.get().discoverAll());
     }
 }
