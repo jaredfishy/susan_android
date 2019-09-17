@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.Map;
 
-import za.co.jaredfishy.susan.domain.Light;
+import za.co.jaredfishy.susan.domain.lights.Light;
 
 public class LightParserTest {
 

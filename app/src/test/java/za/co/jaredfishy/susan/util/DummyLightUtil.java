@@ -1,7 +1,7 @@
 package za.co.jaredfishy.susan.util;
 
-import za.co.jaredfishy.susan.domain.Light;
-import za.co.jaredfishy.susan.domain.LightLocation;
+import za.co.jaredfishy.susan.domain.lights.Light;
+import za.co.jaredfishy.susan.domain.lights.LightLocation;
 
 public class DummyLightUtil {
 

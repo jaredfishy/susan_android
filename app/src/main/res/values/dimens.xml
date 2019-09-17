@@ -5,4 +5,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="lights_button_w">200dp</dimen>
     <dimen name="light_button_h">80dp</dimen>
+    <dimen name="main_drawer_menu_width">280dp</dimen>
+    <dimen name="ui_jz_icon_button_padding">15dp</dimen>
 </resources>

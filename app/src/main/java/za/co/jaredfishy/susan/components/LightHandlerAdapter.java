@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import za.co.jaredfishy.susan.R;
-import za.co.jaredfishy.susan.domain.Light;
-import za.co.jaredfishy.susan.handler.LightHandler;
+import za.co.jaredfishy.susan.domain.lights.Light;
+import za.co.jaredfishy.susan.handler.lights.LightHandler;
 
 public class LightHandlerAdapter extends RecyclerView.Adapter<LightHandlerAdapter.ViewHolder> {
 
