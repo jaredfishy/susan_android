@@ -38,11 +38,10 @@ public class ServiceStatusHandler {
     }
 
     public boolean isAvailable(SusanService service) {
-        return serviceAvailability.get(service);
-    }
-
-    public void setAvailable(SusanService service, boolean available){
-        serviceAvailability.put(service, available);
+        if (service == SusanService.NONE)
+            return true;
+        else
+            return serviceAvailability.get(service);
     }
 
     public void checkAvailableServices(final Callback<SusanResponse> callback) {

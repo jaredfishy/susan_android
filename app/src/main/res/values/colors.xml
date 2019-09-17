@@ -28,7 +28,9 @@
     <color name="jzButtonNormal">#2F4BB2F9</color>
     <color name="jzButtonHighlight">#3F4BB2F9</color>
     <color name="jzButtonText">#FFFFFF</color>
+    <color name="jzButtonTextDisabled">#7A7A7A</color>
     <color name="jzBackgroundColor">#303030</color>
     <color name="jzTextColorSecondary">#8A8A8A</color>
+
 
 </resources>

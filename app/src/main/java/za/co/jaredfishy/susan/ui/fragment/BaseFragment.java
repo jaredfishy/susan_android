@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import za.co.jaredfishy.susan.R;
 import za.co.jaredfishy.susan.ui.activity.BaseActivity;
 import za.co.jaredfishy.susan.util.DimensionUtil;
 
@@ -44,8 +45,10 @@ public abstract class BaseFragment extends Fragment {
     protected void setupRoot() {
         fragmentRoot = new LinearLayout(context);
         fragmentRoot.setOrientation(LinearLayout.VERTICAL);
-        int size = DimensionUtil.getPixels(context, 10);
-        fragmentRoot.setPadding(size, size, size, size);
+        fragmentRoot.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        int horizontalMargin = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+        int verticalMargin = getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
+        fragmentRoot.setPadding(verticalMargin, horizontalMargin, verticalMargin, horizontalMargin);
     }
 
     protected void addView(View view) {

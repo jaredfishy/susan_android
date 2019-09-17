@@ -24,19 +24,14 @@
             android:theme="@style/JZAppTheme.ActionBar"
             />
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/main_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             >
 
-            <FrameLayout
-                android:id="@+id/main_fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-            </FrameLayout>
-
-        </ScrollView>
+        </LinearLayout>
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
@@ -45,7 +40,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:itemTextColor="?attr/primaryTextColor"
+        app:itemTextColor="@color/ui_button_text"
+        app:itemIconTint="@color/ui_button_icon"
         app:headerLayout="@layout/main_header"
         />
 

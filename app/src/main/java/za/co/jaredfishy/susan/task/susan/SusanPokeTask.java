@@ -14,7 +14,6 @@ public class SusanPokeTask extends AsyncTask<String, String, SusanResponse> {
     @Override
     protected SusanResponse doInBackground(String... string) {
 
-//        ThreadSleeper.sleep(250);
         LightServiceMethods service = LightService.get();
 
         ServiceResponseProcessor responseProcessor = new ServiceResponseProcessor();

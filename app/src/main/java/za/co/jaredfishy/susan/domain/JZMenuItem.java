@@ -8,7 +8,8 @@ public enum JZMenuItem {
     HOME(1, "Home", R.drawable.ic_service_home_32dp, 1, SusanService.NONE),
     STATUS(2, "Status", R.drawable.ic_service_status_32dp, 1, SusanService.NONE),
     LIGHTS(3, "Lights", R.drawable.ic_service_lights_32dp, 1, SusanService.LIGHTS),
-    SETTINGS(4, "Settings", 0, 2, SusanService.NONE);
+    SETTINGS(4, "Settings", 0, 2, SusanService.NONE),
+    TEST(5, "Test", 0, 2, SusanService.NONE);
 
     private int id;
     private String text;

@@ -19,6 +19,7 @@ public class JZButton extends android.support.v7.widget.AppCompatButton {
     }
 
     private void init() {
+        this.setBackgroundResource(R.drawable.ui_button);
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
