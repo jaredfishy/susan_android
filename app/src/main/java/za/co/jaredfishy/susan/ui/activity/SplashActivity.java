@@ -60,6 +60,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             protected void onFail(String response) {
                 txtStatus.setText(response);
+                btnOk.setVisibility(View.VISIBLE);
             }
         };
         susanPokeTask.execute();

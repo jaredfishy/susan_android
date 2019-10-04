@@ -22,7 +22,7 @@ public abstract class JZTask<T> extends AsyncTask<String, String, JZTaskResponse
 
     @Override
     protected final JZTaskResponse<T> doInBackground(String... string) {
-        ThreadSleeper.sleep(250);
+        ThreadSleeper.sleep(50);
         JZTaskResponse<T> response = new JZTaskResponse<>();
 
         try {

@@ -54,7 +54,7 @@ public class ServiceStatusHandler {
                 checkProgress.remove(service);
 
                 if (checkProgress.size() == 0 && callback != null)
-                    callback.done(new SusanResponse("Everything looks to be working :)", TimestampUtil.getTimestampAsString()));
+                    callback.done(new SusanResponse("Done checking services.", TimestampUtil.getTimestampAsString()));
             }
         };
 
